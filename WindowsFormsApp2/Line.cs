@@ -11,16 +11,18 @@ namespace WindowsFormsApp2
     public class Line : IShape
     {
         Graphics g;
-        List<object> list = new List<object>();
-        public Line(List<object> List)
+        Pen pen;
+        List<object> options = new List<object>();
+        public Line(Pen Pen,List<object> List)
         {
-            list = List;
-            g = (Graphics)list.ElementAtOrDefault(4);
+            options = List;
+            g = (Graphics)options.ElementAtOrDefault(2);
+            pen = Pen;
         }
 
         public void Draw()
         {
-            g.DrawLine((Pen)list.ElementAtOrDefault(1), new Point((int)list.ElementAtOrDefault(2), (int)list.ElementAtOrDefault(3)), (Point)list.ElementAtOrDefault(5));
+            g.DrawLine(pen, new Point((int)options.ElementAtOrDefault(0), (int)options.ElementAtOrDefault(1)), (Point)options.ElementAtOrDefault(3));
         }
     }
 }

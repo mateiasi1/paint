@@ -43,7 +43,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 400);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Canvas);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseUp);
@@ -68,7 +68,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Rectangle";
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.rectangleButton);
             // 
             // button2
             // 
@@ -79,7 +79,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Elipse";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.elipseButton);
             // 
             // button1
             // 
@@ -90,7 +90,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Free Draw(Pen)";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.freeDrawButton);
             // 
             // Form1
             // 

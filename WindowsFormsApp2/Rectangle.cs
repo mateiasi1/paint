@@ -10,16 +10,18 @@ namespace WindowsFormsApp2
 {
     public class Rectangle : IShape
     {
-        List<object> list;
+        List<object> options;
         Graphics g;
-        public Rectangle(List<object> List)
+        Pen pen;
+        public Rectangle(Pen Pen,List<object> List)
         {
-            list = List;
-            g = (Graphics)list.ElementAtOrDefault(6);
+            options = List;
+            g = (Graphics)options.ElementAtOrDefault(4);
+            pen = Pen;
         }
         public void Draw()
         {
-            g.DrawRectangle((Pen)list.ElementAtOrDefault(1), (System.Drawing.Rectangle)list.ElementAtOrDefault(7));
+            g.DrawRectangle(pen, (System.Drawing.Rectangle)options.ElementAtOrDefault(5));
         }
     }
 }

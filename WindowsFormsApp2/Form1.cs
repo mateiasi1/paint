@@ -29,17 +29,17 @@ namespace WindowsFormsApp2
             pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void drawing_Canvas(object sender, PaintEventArgs e)
         {
-            
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void freeDrawButton(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             shapeType = ShapeType.Free;
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void elipseButton(object sender, EventArgs e)
         {
             Button c = (Button)sender;
             shapeType = ShapeType.Circle;
@@ -50,7 +50,7 @@ namespace WindowsFormsApp2
             x = e.X;
             y = e.Y;
             this.rectangle_bounds.Location = e.Location;
-           
+
         }
 
         private void mouseMove(object sender, MouseEventArgs e)
@@ -59,14 +59,12 @@ namespace WindowsFormsApp2
             {
                 if (moving && x != -1 && y != -1)
                 {
-                    List<object> list = new List<object>();
-                    list.Add(shapeType);
-                    list.Add(pen);
-                    list.Add(x);
-                    list.Add(y);
-                    list.Add(g);
-                    list.Add(e.Location);
-                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(list);
+                    List<object> options = new List<object>();
+                    options.Add(x);
+                    options.Add(y);
+                    options.Add(g);
+                    options.Add(e.Location);
+                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(shapeType, pen, options);
                     IShape shape1 = shapeFactory1.getShape(shapeType);
                     shape1.Draw();
                 }
@@ -84,17 +82,15 @@ namespace WindowsFormsApp2
             {
                 if (moving && x != -1 && y != -1)
                 {
-                    List<object> list = new List<object>();
-                    list.Add(shapeType);
-                    list.Add(pen);
-                    list.Add(x);
-                    list.Add(y);
-                    list.Add(50);
-                    list.Add(50);
-                    list.Add(g);
-                    list.Add(rectangle_bounds);
+                    List<object> options = new List<object>();
+                    options.Add(x);
+                    options.Add(y);
+                    options.Add(50);
+                    options.Add(50);
+                    options.Add(g);
+                    options.Add(rectangle_bounds);
 
-                    AbstractFactory shapeFactory = FactoryProducer.getFactory(list);
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options);
                     IShape shape = shapeFactory.getShape(shapeType);
                     shape.Draw();
 
@@ -106,7 +102,7 @@ namespace WindowsFormsApp2
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void rectangleButton(object sender, EventArgs e)
         {
             Button d = (Button)sender;
             shapeType = ShapeType.Square;

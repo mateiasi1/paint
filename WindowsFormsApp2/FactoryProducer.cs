@@ -10,9 +10,9 @@ namespace WindowsFormsApp2
 {
     public class FactoryProducer
     {
-        public static AbstractFactory getFactory(List<object> list)
+        public static AbstractFactory getFactory(ShapeType shapeType, Pen pen,List<object> list)
         {
-            return new  ShapeFactory(list);
+            return new  ShapeFactory(shapeType, pen, list);
         }
 
        
