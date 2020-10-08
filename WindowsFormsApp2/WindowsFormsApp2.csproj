@@ -56,7 +56,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Line.cs" />
-    <Compile Include="ShapeComplexFactory.cs" />
     <Compile Include="ShapeType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

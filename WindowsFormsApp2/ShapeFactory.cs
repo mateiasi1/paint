@@ -10,38 +10,30 @@ namespace WindowsFormsApp2
 {
     public class ShapeFactory : AbstractFactory
     {
-        public ShapeType shapeType { get; set; }
-        public Pen pen { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public float width { get; set; }
-        public float height { get; set; }
-        public Graphics g { get; set; }
-        public Point e { get; set; }
+        List<object> list = new List<object>();
 
-        public ShapeFactory(ShapeType shapeType, Pen pen, int x, int y, Graphics g, Point e)
+        public ShapeFactory(List<object> List)
         {
-            this.shapeType = shapeType;
-            this.pen = pen;
-            this.x = x;
-            this.y = y;
-            this.g = g;
-            this.e = e;
+            list = List;
         }
 
         public override IShape getShape(ShapeType shapeType)
         {
             if (shapeType == ShapeType.Free)
             {
-                return new Line(shapeType, pen, x, y, g, e);
+                return new Line((ShapeType)list.ElementAtOrDefault(0), (Pen)list.ElementAtOrDefault(1), (int)list.ElementAtOrDefault(2), (int)list.ElementAtOrDefault(3), (Graphics)list.ElementAtOrDefault(4), (Point)list.ElementAtOrDefault(5));
+            }
+            else if (shapeType == ShapeType.Circle)
+            {
+                return new Circle((ShapeType)list.ElementAtOrDefault(0), (Pen)list.ElementAtOrDefault(1), (int)list.ElementAtOrDefault(2), (int)list.ElementAtOrDefault(3), (int)list.ElementAtOrDefault(4), (int)list.ElementAtOrDefault(5), (Graphics)list.ElementAtOrDefault(6));
+            }
+            else if (shapeType == ShapeType.Square)
+            {
+                return new Square((ShapeType)list.ElementAtOrDefault(0), (Pen)list.ElementAtOrDefault(1), (int)list.ElementAtOrDefault(2), (int)list.ElementAtOrDefault(3), (int)list.ElementAtOrDefault(4), (int)list.ElementAtOrDefault(5), (Graphics)list.ElementAtOrDefault(6));
             }
             return null;
         }
 
-        public override IShape getComplexShape(ShapeType shapeType)
-        {
-            return null;
-        }
     }
     
 }

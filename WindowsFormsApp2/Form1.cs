@@ -18,6 +18,7 @@ namespace WindowsFormsApp2
         bool moving = false;
         Pen pen;
         ShapeType shapeType;
+        
         public Form1()
         {
             InitializeComponent();
@@ -51,10 +52,19 @@ namespace WindowsFormsApp2
             {
                 if (moving && x != -1 && y != -1)
                 {
-                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, x, y, 50, 50, g, e);
-                    IShape shape = shapeFactory.getComplexShape(shapeType);
+                    List<object> list = new List<object>();
+                    list.Add(shapeType);
+                    list.Add(pen);
+                    list.Add(x);
+                    list.Add(y);
+                    list.Add(50);
+                    list.Add(50);
+                    list.Add(g);
+                    
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(list);
+                    IShape shape = shapeFactory.getShape(shapeType);
                     shape.Draw();
-
+                    
                 }
             }
 
@@ -68,7 +78,14 @@ namespace WindowsFormsApp2
             {
                 if (moving && x != -1 && y != -1)
                 {
-                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(shapeType, pen, x, y, e.Location, g);
+                    List<object> list = new List<object>();
+                    list.Add(shapeType);
+                    list.Add(pen);
+                    list.Add(x);
+                    list.Add(y);
+                    list.Add(g);
+                    list.Add(e.Location);
+                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(list);
                     IShape shape1 = shapeFactory1.getShape(shapeType);
                     shape1.Draw();
                 }

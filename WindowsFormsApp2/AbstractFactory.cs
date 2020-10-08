@@ -11,6 +11,5 @@ namespace WindowsFormsApp2
     public abstract class AbstractFactory
     {
         public abstract IShape getShape(ShapeType shapeType);
-        public abstract IShape getComplexShape(ShapeType shapeType);
     }
 }
