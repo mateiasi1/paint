@@ -18,7 +18,7 @@ namespace WindowsFormsApp2
         bool moving = false;
         Pen pen;
         ShapeType shapeType;
-        Rectangle rectangle_bounds = new Rectangle();
+        System.Drawing.Rectangle rectangle_bounds = new System.Drawing.Rectangle();
 
         public Form1()
         {

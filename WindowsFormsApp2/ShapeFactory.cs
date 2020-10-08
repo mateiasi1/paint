@@ -25,11 +25,11 @@ namespace WindowsFormsApp2
             }
             else if (shapeType == ShapeType.Circle)
             {
-                return new Circle(list);
+                return new Elipse(list);
             }
             else if (shapeType == ShapeType.Square)
             {
-                return new Square(list);
+                return new Rectangle(list);
             }
             return null;
         }
