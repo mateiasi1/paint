@@ -18,7 +18,8 @@ namespace WindowsFormsApp2
         bool moving = false;
         Pen pen;
         ShapeType shapeType;
-        
+        Rectangle rectangle_bounds = new Rectangle();
+
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace WindowsFormsApp2
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,28 +49,8 @@ namespace WindowsFormsApp2
             moving = true;
             x = e.X;
             y = e.Y;
-            if (shapeType != ShapeType.Free)
-            {
-                if (moving && x != -1 && y != -1)
-                {
-                    List<object> list = new List<object>();
-                    list.Add(shapeType);
-                    list.Add(pen);
-                    list.Add(x);
-                    list.Add(y);
-                    list.Add(50);
-                    list.Add(50);
-                    list.Add(g);
-                    
-                    AbstractFactory shapeFactory = FactoryProducer.getFactory(list);
-                    IShape shape = shapeFactory.getShape(shapeType);
-                    shape.Draw();
-                    
-                }
-            }
-
-            x = e.X;
-            y = e.Y;
+            this.rectangle_bounds.Location = e.Location;
+           
         }
 
         private void mouseMove(object sender, MouseEventArgs e)
@@ -98,6 +79,27 @@ namespace WindowsFormsApp2
 
         private void mouseUp(object sender, MouseEventArgs e)
         {
+            this.rectangle_bounds.Size = new Size(e.X - this.rectangle_bounds.X, e.Y - this.rectangle_bounds.Y);
+            if (shapeType != ShapeType.Free)
+            {
+                if (moving && x != -1 && y != -1)
+                {
+                    List<object> list = new List<object>();
+                    list.Add(shapeType);
+                    list.Add(pen);
+                    list.Add(x);
+                    list.Add(y);
+                    list.Add(50);
+                    list.Add(50);
+                    list.Add(g);
+                    list.Add(rectangle_bounds);
+
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(list);
+                    IShape shape = shapeFactory.getShape(shapeType);
+                    shape.Draw();
+
+                }
+            }
             moving = false;
             x = -1;
             y = -1;

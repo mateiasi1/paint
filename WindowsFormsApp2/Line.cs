@@ -10,27 +10,17 @@ namespace WindowsFormsApp2
 {
     public class Line : IShape
     {
-
-        public Point eve { get; set; }
-        public ShapeType shapeType { get; set; }
-        public Pen pen { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public Graphics g { get; set; }
-
-        public Line(ShapeType ShapeType,Pen Pen, int X, int Y, Graphics G, Point e)
+        Graphics g;
+        List<object> list = new List<object>();
+        public Line(List<object> List)
         {
-            shapeType = ShapeType;
-            pen = Pen;
-            x = X;
-            y = Y;
-            g = G;
-            eve = e;
+            list = List;
+            g = (Graphics)list.ElementAtOrDefault(4);
         }
 
         public void Draw()
         {
-            g.DrawLine(pen, new Point( x, y), eve);
+            g.DrawLine((Pen)list.ElementAtOrDefault(1), new Point((int)list.ElementAtOrDefault(2), (int)list.ElementAtOrDefault(3)), (Point)list.ElementAtOrDefault(5));
         }
     }
 }
