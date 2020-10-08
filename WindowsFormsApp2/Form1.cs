@@ -17,7 +17,7 @@ namespace WindowsFormsApp2
         int y = -1;
         bool moving = false;
         Pen pen;
-        PenType penType;
+        ShapeType shapeType;
         public Form1()
         {
             InitializeComponent();
@@ -35,43 +35,48 @@ namespace WindowsFormsApp2
         private void button1_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            penType = PenType.Free;
+            shapeType = ShapeType.Free;
         }
         private void button2_Click(object sender, EventArgs e)
         {
             Button c = (Button)sender;
-            penType = PenType.Circle;
+            shapeType = ShapeType.Circle;
         }
         private void mouseDown(object sender, MouseEventArgs e)
         {
             moving = true;
             x = e.X;
             y = e.Y;
-            if (penType is PenType.Circle)
+            if (shapeType != ShapeType.Free)
             {
-                Circle circle = new Circle(x, y, moving, 200, 200, e, g, pen);
-                circle.Draw();
+                if (moving && x != -1 && y != -1)
+                {
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, x, y, 50, 50, g, e);
+                    IShape shape = shapeFactory.getComplexShape(shapeType);
+                    shape.Draw();
 
+                }
+            }
 
-            }
-            else if (penType is PenType.Square)
-            {
-                Square square = new Square(x, y, moving, 200, 200, g, pen);
-                square.Draw();
-            }
+            x = e.X;
+            y = e.Y;
         }
 
         private void mouseMove(object sender, MouseEventArgs e)
         {
-            if (penType is PenType.Free)
+            if (shapeType == ShapeType.Free)
             {
-                Line line = new Line(x, y, moving, e, g, pen);
-                line.Draw();
-                x = e.X;
-                y = e.Y;
+                if (moving && x != -1 && y != -1)
+                {
+                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(shapeType, pen, x, y, e.Location, g);
+                    IShape shape1 = shapeFactory1.getShape(shapeType);
+                    shape1.Draw();
+                }
             }
-            
-            
+
+            x = e.X;
+            y = e.Y;
+
         }
 
         private void mouseUp(object sender, MouseEventArgs e)
@@ -85,7 +90,7 @@ namespace WindowsFormsApp2
         private void button3_Click(object sender, EventArgs e)
         {
             Button d = (Button)sender;
-            penType = PenType.Square;
+            shapeType = ShapeType.Square;
         }
     }
 }

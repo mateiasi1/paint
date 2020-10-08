@@ -8,26 +8,29 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public class Line : Shape
+    public class Line : IShape
     {
-        public MouseEventArgs e { get; set; }
-        public Line(int X, int Y, bool Moving, MouseEventArgs E, Graphics G, Pen Pen)
+
+        public Point eve { get; set; }
+        public ShapeType shapeType { get; set; }
+        public Pen pen { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public Graphics g { get; set; }
+
+        public Line(ShapeType ShapeType,Pen Pen, int X, int Y, Graphics G, Point e)
         {
+            shapeType = ShapeType;
+            pen = Pen;
             x = X;
             y = Y;
-            moving = Moving;
             g = G;
-            pen = Pen;
-            e = E;
-
+            eve = e;
         }
-        public override void Draw()
-        {
-            if (moving && x != -1 && y != -1)
-            {
-                g.DrawLine(pen, new Point(x, y), e.Location);
 
-            }
+        public void Draw()
+        {
+            g.DrawLine(pen, new Point( x, y), eve);
         }
     }
 }

@@ -8,28 +8,29 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public class Circle : Shape
+    public class Circle : IShape
     {
-        public MouseEventArgs e { get; set; }
-        public Circle(int X, int Y, bool Moving, int Width, int Height, MouseEventArgs E, Graphics G, Pen Pen)
+        public ShapeType shapeType { get; set; }
+        public Pen pen { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public float width { get; set; }
+        public float height { get; set; }
+        public Graphics g { get; set; }
+        public Circle(ShapeType ShapeType, Pen Pen, int X, int Y, float Width, float Height, Graphics G)
         {
+            shapeType = ShapeType;
+            pen = Pen;
             x = X;
             y = Y;
-            moving = Moving;
             width = Width;
             height = Height;
             g = G;
-            pen = Pen;
-            e = E;
         }
-
-        public override void Draw()
+        public void Draw()
         {
-            if (moving && x != -1 && y != -1)
-            {
-                g.DrawEllipse(pen, x, y, width, height);
-
-            }
+            g.DrawEllipse(pen, x, y, width, height);
         }
+
     }
 }
