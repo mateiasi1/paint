@@ -10,18 +10,18 @@ namespace WindowsFormsApp2
 {
     public class Elipse : IShape
     {
-        List<object> options;
+        Options options;
         Graphics g;
         Pen pen;
-        public Elipse(Pen Pen, List<object> List)
+        public Elipse(Pen Pen, Options Options, Graphics G)
         {
-            options = List;
-            g = (Graphics)options.ElementAtOrDefault(4);
+            options = Options;
+            g = G;
             pen = Pen;
         }
         public void Draw()
         {
-            g.DrawEllipse(pen, (System.Drawing.Rectangle)options.ElementAtOrDefault(5));
+            g.DrawEllipse(pen, options.RectangleBounds);
         }
 
     }

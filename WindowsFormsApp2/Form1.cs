@@ -59,12 +59,11 @@ namespace WindowsFormsApp2
             {
                 if (moving && x != -1 && y != -1)
                 {
-                    List<object> options = new List<object>();
-                    options.Add(x);
-                    options.Add(y);
-                    options.Add(g);
-                    options.Add(e.Location);
-                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(shapeType, pen, options);
+                    Options options = new Options();
+                    options.X = x;
+                    options.Y = y;
+                    options.Location = e.Location;
+                    AbstractFactory shapeFactory1 = FactoryProducer.getFactory(shapeType, pen, options, g);
                     IShape shape1 = shapeFactory1.getShape(shapeType);
                     shape1.Draw();
                 }
@@ -82,15 +81,10 @@ namespace WindowsFormsApp2
             {
                 if (moving && x != -1 && y != -1)
                 {
-                    List<object> options = new List<object>();
-                    options.Add(x);
-                    options.Add(y);
-                    options.Add(50);
-                    options.Add(50);
-                    options.Add(g);
-                    options.Add(rectangle_bounds);
+                    Options options = new Options();
+                    options.RectangleBounds = rectangle_bounds;
 
-                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options);
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options, g);
                     IShape shape = shapeFactory.getShape(shapeType);
                     shape.Draw();
 

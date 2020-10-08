@@ -12,17 +12,17 @@ namespace WindowsFormsApp2
     {
         Graphics g;
         Pen pen;
-        List<object> options = new List<object>();
-        public Line(Pen Pen,List<object> List)
+        Options options;
+        public Line(Pen Pen,Options Options, Graphics G)
         {
-            options = List;
-            g = (Graphics)options.ElementAtOrDefault(2);
+            options = Options;
+            g = G;
             pen = Pen;
         }
 
         public void Draw()
         {
-            g.DrawLine(pen, new Point((int)options.ElementAtOrDefault(0), (int)options.ElementAtOrDefault(1)), (Point)options.ElementAtOrDefault(3));
+            g.DrawLine(pen, new Point(options.X, options.Y), options.Location);
         }
     }
 }

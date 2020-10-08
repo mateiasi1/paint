@@ -10,32 +10,34 @@ namespace WindowsFormsApp2
 {
     public class ShapeFactory : AbstractFactory
     {
-        List<object> options = new List<object>();
+        Options options;
         Pen pen;
+        Graphics g;
 
-        public ShapeFactory(ShapeType shapeType, Pen Pen, List<object> List)
+        public ShapeFactory(ShapeType shapeType, Pen Pen, Options Options, Graphics G)
         {
-            options = List;
+            options = Options;
             pen = Pen;
+            g = G;
         }
 
         public override IShape getShape(ShapeType shapeType)
         {
             if (shapeType == ShapeType.Free)
             {
-                return new Line(pen, options);
+                return new Line(pen, options, g);
             }
             else if (shapeType == ShapeType.Circle)
             {
-                return new Elipse(pen, options);
+                return new Elipse(pen, options, g);
             }
             else if (shapeType == ShapeType.Square)
             {
-                return new Rectangle(pen, options);
+                return new Rectangle(pen, options, g);
             }
             return null;
         }
 
     }
-    
+
 }
