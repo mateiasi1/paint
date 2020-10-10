@@ -20,6 +20,7 @@ namespace WindowsFormsApp2
         ShapeType shapeType;
         System.Drawing.Rectangle rectangle_bounds = new System.Drawing.Rectangle();
         List<IShape> shapes = new List<IShape>();
+        List<IShape> removedShapes = new List<IShape>();
 
         public Form1()
         {
@@ -32,7 +33,7 @@ namespace WindowsFormsApp2
 
         private void drawing_Canvas(object sender, PaintEventArgs e)
         {
-
+            redraw();
         }
 
         private void freeDrawButton(object sender, EventArgs e)
@@ -109,6 +110,34 @@ namespace WindowsFormsApp2
             foreach (var item in shapes)
             {
                 item.Draw();
+            }
+
+            panel1.Focus();
+        }
+
+        private void panel1_PreviewKeyDown_1(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Z && e.Control)
+            {
+                if (shapes.Count == 0)
+                {
+                    return;
+                }
+                IShape lastShape = shapes.Last();
+                shapes.Remove(lastShape);
+                removedShapes.Add(lastShape);
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.Y && e.Control)
+            {
+                if (removedShapes.Count==0)
+                {
+                    return;
+                }
+                IShape lastShape = removedShapes.Last();
+                removedShapes.Remove(lastShape);
+                shapes.Add(lastShape);
+                panel1.Invalidate();
             }
         }
     }

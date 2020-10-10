@@ -47,6 +47,7 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseUp);
+            this.panel1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel1_PreviewKeyDown_1);
             // 
             // panel2
             // 
