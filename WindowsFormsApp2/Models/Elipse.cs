@@ -13,11 +13,13 @@ namespace WindowsFormsApp2
         Options options;
         Graphics g;
         Pen pen;
-        public Elipse(Pen Pen, Options Options, Graphics G)
+        ShapeType shapeType;
+        public Elipse(ShapeType ShapeType, Pen Pen, Options Options, Graphics G)
         {
             options = Options;
             g = G;
             pen = Pen;
+            shapeType = ShapeType;
         }
         public void Draw()
         {

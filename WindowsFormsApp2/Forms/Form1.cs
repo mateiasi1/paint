@@ -19,6 +19,7 @@ namespace WindowsFormsApp2
         Pen pen;
         ShapeType shapeType;
         System.Drawing.Rectangle rectangle_bounds = new System.Drawing.Rectangle();
+        List<IShape> shapes = new List<IShape>();
 
         public Form1()
         {
@@ -65,7 +66,8 @@ namespace WindowsFormsApp2
                     options.Location = e.Location;
                     AbstractFactory shapeFactory1 = FactoryProducer.getFactory(shapeType, pen, options, g);
                     IShape shape1 = shapeFactory1.getShape(shapeType);
-                    shape1.Draw();
+                    shapes.Add(shape1);
+                    redraw();
                 }
             }
 
@@ -86,8 +88,8 @@ namespace WindowsFormsApp2
 
                     AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options, g);
                     IShape shape = shapeFactory.getShape(shapeType);
-                    shape.Draw();
-
+                    shapes.Add(shape);
+                    redraw();
                 }
             }
             moving = false;
@@ -100,6 +102,14 @@ namespace WindowsFormsApp2
         {
             Button d = (Button)sender;
             shapeType = ShapeType.Square;
+        }
+
+        public void redraw()
+        {
+            foreach (var item in shapes)
+            {
+                item.Draw();
+            }
         }
     }
 }

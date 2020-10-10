@@ -13,11 +13,13 @@ namespace WindowsFormsApp2
         Graphics g;
         Pen pen;
         Options options;
-        public Line(Pen Pen,Options Options, Graphics G)
+        ShapeType shapeType;
+        public Line(ShapeType ShapeType, Pen Pen,Options Options, Graphics G)
         {
             options = Options;
             g = G;
             pen = Pen;
+            shapeType = ShapeType;
         }
 
         public void Draw()

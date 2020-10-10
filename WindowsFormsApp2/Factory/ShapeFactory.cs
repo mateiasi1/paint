@@ -25,15 +25,15 @@ namespace WindowsFormsApp2
         {
             if (shapeType == ShapeType.Free)
             {
-                return new Line(pen, options, g);
+                return new Line(shapeType, pen, options, g);
             }
             else if (shapeType == ShapeType.Circle)
             {
-                return new Elipse(pen, options, g);
+                return new Elipse(shapeType, pen, options, g);
             }
             else if (shapeType == ShapeType.Square)
             {
-                return new Rectangle(pen, options, g);
+                return new Rectangle(shapeType, pen, options, g);
             }
             return null;
         }

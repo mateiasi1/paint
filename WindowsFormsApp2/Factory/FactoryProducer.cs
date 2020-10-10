@@ -14,7 +14,5 @@ namespace WindowsFormsApp2
         {
             return new ShapeFactory(shapeType, pen, options, g);
         }
-
-
     }
 }
