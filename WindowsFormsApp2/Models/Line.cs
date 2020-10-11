@@ -31,5 +31,12 @@ namespace WindowsFormsApp2
         {
             return options;
         }
+
+        public IShape MoveShape(Point point, IShape shape)
+        {
+            options.X = point.X;
+            options.Y = point.Y;
+            return shape;
+        }
     }
 }

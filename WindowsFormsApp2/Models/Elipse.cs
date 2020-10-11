@@ -30,5 +30,11 @@ namespace WindowsFormsApp2
         {
             return options;
         }
+
+        public IShape MoveShape(Point point, IShape shape)
+        {
+            options.RectangleBounds = new System.Drawing.Rectangle(point.X, point.Y, options.RectangleBounds.Width, options.RectangleBounds.Height);
+            return shape;
+        }
     }
 }

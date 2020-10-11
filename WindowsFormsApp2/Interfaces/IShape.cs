@@ -12,5 +12,6 @@ namespace WindowsFormsApp2
     {
         void Draw();
         Options GetOptions(IShape shape);
+        IShape MoveShape(Point point, IShape shape);
     }
 }

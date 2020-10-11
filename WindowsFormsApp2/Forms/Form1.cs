@@ -69,7 +69,7 @@ namespace WindowsFormsApp2
                     IShape shape1 = shapeFactory1.getShape(shapeType);
                     shapes.Add(shape1);
                     redraw();
-                   var shapeOptions =  shape1.GetOptions(shape1);
+                    
                 }
             }
 
@@ -92,7 +92,6 @@ namespace WindowsFormsApp2
                     IShape shape = shapeFactory.getShape(shapeType);
                     shapes.Add(shape);
                     redraw();
-                    var shapeOptions = shape.GetOptions(shape);
 
                 }
             }
@@ -142,6 +141,15 @@ namespace WindowsFormsApp2
                 shapes.Add(lastShape);
                 panel1.Invalidate();
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var shape = shapes.FirstOrDefault();
+            shapes.Remove(shape);
+            shape.MoveShape(new Point(20, 20), shape);
+            shapes.Add(shape);
+            panel1.Invalidate();
         }
     }
 }
