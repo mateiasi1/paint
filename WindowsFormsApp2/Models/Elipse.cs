@@ -26,5 +26,9 @@ namespace WindowsFormsApp2
             g.DrawEllipse(pen, options.RectangleBounds);
         }
 
+        public Options GetOptions(IShape shape)
+        {
+            return options;
+        }
     }
 }

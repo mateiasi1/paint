@@ -69,6 +69,7 @@ namespace WindowsFormsApp2
                     IShape shape1 = shapeFactory1.getShape(shapeType);
                     shapes.Add(shape1);
                     redraw();
+                   var shapeOptions =  shape1.GetOptions(shape1);
                 }
             }
 
@@ -91,6 +92,8 @@ namespace WindowsFormsApp2
                     IShape shape = shapeFactory.getShape(shapeType);
                     shapes.Add(shape);
                     redraw();
+                    var shapeOptions = shape.GetOptions(shape);
+
                 }
             }
             moving = false;

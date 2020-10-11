@@ -11,5 +11,6 @@ namespace WindowsFormsApp2
     public interface IShape
     {
         void Draw();
+        Options GetOptions(IShape shape);
     }
 }

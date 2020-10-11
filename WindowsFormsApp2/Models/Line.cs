@@ -26,5 +26,10 @@ namespace WindowsFormsApp2
         {
             g.DrawLine(pen, new Point(options.X, options.Y), options.Location);
         }
+
+        public Options GetOptions(IShape shape)
+        {
+            return options;
+        }
     }
 }

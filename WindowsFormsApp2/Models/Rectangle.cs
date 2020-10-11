@@ -25,5 +25,10 @@ namespace WindowsFormsApp2
         {
             g.DrawRectangle(pen, options.RectangleBounds);
         }
+
+        public Options GetOptions(IShape shape)
+        {
+            return options;
+        }
     }
 }
