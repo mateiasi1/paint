@@ -59,7 +59,8 @@ namespace WindowsFormsApp2
                 if (IsInside(e.Location.X,e.Location.Y,location.RectangleBounds))
                 {
                     selectedShape = item;
-                   // MessageBox.Show("rectangle is selected");
+                    moving = false;
+                    //MessageBox.Show("rectangle is selected");
                 }
 
             }
@@ -97,7 +98,7 @@ namespace WindowsFormsApp2
                 shapes.Add(selectedShape);
                 panel1.Invalidate();
             }
-            selectedShape = null;
+
             x = e.X;
             y = e.Y;
 
@@ -120,6 +121,7 @@ namespace WindowsFormsApp2
 
                 }
             }
+            selectedShape = null;
             moving = false;
             x = -1;
             y = -1;
