@@ -60,6 +60,7 @@ namespace WindowsFormsApp2
                 {
                     selectedShape = item;
                     moving = false;
+                    Cursor.Current = Cursors.SizeAll;
                     //MessageBox.Show("rectangle is selected");
                 }
 
