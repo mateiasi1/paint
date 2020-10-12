@@ -21,6 +21,7 @@ namespace WindowsFormsApp2
         System.Drawing.Rectangle rectangle_bounds = new System.Drawing.Rectangle();
         List<IShape> shapes = new List<IShape>();
         List<IShape> removedShapes = new List<IShape>();
+        IShape selectedShape;
 
         public Form1()
         {
@@ -52,9 +53,26 @@ namespace WindowsFormsApp2
             x = e.X;
             y = e.Y;
             this.rectangle_bounds.Location = e.Location;
+            foreach (var item in shapes)
+            {
+               var location = item.GetOptions(item);
+                if (IsInside(e.Location.X,e.Location.Y,location.RectangleBounds))
+                {
+                    selectedShape = item;
+                   // MessageBox.Show("rectangle is selected");
+                }
+
+            }
 
         }
-
+        public bool IsInside(int mouseX, int mouseY, System.Drawing.Rectangle rect)
+        {
+            return
+                mouseX >= rect.X &&
+                mouseX <= rect.X + rect.Width &&
+                mouseY >= rect.Y &&
+                mouseY <= rect.Y + rect.Height;
+        }
         private void mouseMove(object sender, MouseEventArgs e)
         {
             if (shapeType == ShapeType.Free)
@@ -72,7 +90,14 @@ namespace WindowsFormsApp2
                     
                 }
             }
-
+            if (selectedShape != null)
+            {
+                shapes.Remove(selectedShape);
+                selectedShape.MoveShape(new Point(e.Location.X, e.Location.Y), selectedShape);
+                shapes.Add(selectedShape);
+                panel1.Invalidate();
+            }
+            selectedShape = null;
             x = e.X;
             y = e.Y;
 
