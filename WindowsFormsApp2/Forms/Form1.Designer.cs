@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.drawingPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,17 +39,17 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel1.Location = new System.Drawing.Point(0, 50);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 400);
-            this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Canvas);
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
-            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouseMove);
-            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseUp);
-            this.panel1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel1_PreviewKeyDown_1);
+            this.drawingPanel.BackColor = System.Drawing.Color.White;
+            this.drawingPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.drawingPanel.Location = new System.Drawing.Point(0, 50);
+            this.drawingPanel.Name = "drawingPanel";
+            this.drawingPanel.Size = new System.Drawing.Size(800, 400);
+            this.drawingPanel.TabIndex = 0;
+            this.drawingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Canvas);
+            this.drawingPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
+            this.drawingPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouseMove);
+            this.drawingPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseUp);
+            this.drawingPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.drawingPanelKeyDown);
             // 
             // panel2
             // 
@@ -112,7 +112,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.drawingPanel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel2.ResumeLayout(false);
@@ -122,7 +122,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel drawingPanel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;

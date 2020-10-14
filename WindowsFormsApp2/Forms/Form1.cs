@@ -26,7 +26,7 @@ namespace WindowsFormsApp2
         public Form1()
         {
             InitializeComponent();
-            g = panel1.CreateGraphics();
+            g = drawingPanel.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             pen = new Pen(Color.Black, 5);
             pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
@@ -96,7 +96,23 @@ namespace WindowsFormsApp2
                 }
             }
             this.rectangle_bounds.Size = new Size(e.X - this.rectangle_bounds.X, e.Y - this.rectangle_bounds.Y);
-            if (shapeType != ShapeType.Free)
+            
+            if (Control.ModifierKeys == Keys.Shift && shapeType != ShapeType.Free)
+            {
+                if (moving && x != -1 && y != -1)
+                {
+                    Options options = new Options();
+                    rectangle_bounds.Height = rectangle_bounds.Width;
+                    options.RectangleBounds = rectangle_bounds;
+
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options, g);
+                    IShape shape = shapeFactory.getShape(shapeType);
+                    previewShape.Add(shape);
+                    showPreview();
+                    drawingPanel.Invalidate();
+                }
+            }
+            else if (shapeType != ShapeType.Free)
             {
                 if (moving && x != -1 && y != -1)
                 {
@@ -107,7 +123,7 @@ namespace WindowsFormsApp2
                     IShape shape = shapeFactory.getShape(shapeType);
                     previewShape.Add(shape);
                     showPreview();
-                    panel1.Invalidate();
+                    drawingPanel.Invalidate();
                 }
             }
             if (selectedShape != null)
@@ -115,7 +131,7 @@ namespace WindowsFormsApp2
                 shapes.Remove(selectedShape);
                 selectedShape.MoveShape(new Point(e.Location.X, e.Location.Y), selectedShape);
                 shapes.Add(selectedShape);
-                panel1.Invalidate();
+                drawingPanel.Invalidate();
             }
 
             x = e.X;
@@ -126,7 +142,22 @@ namespace WindowsFormsApp2
         private void mouseUp(object sender, MouseEventArgs e)
         {
             this.rectangle_bounds.Size = new Size(e.X - this.rectangle_bounds.X, e.Y - this.rectangle_bounds.Y);
-            if (shapeType != ShapeType.Free)
+            if (Control.ModifierKeys == Keys.Shift && shapeType != ShapeType.Free)
+            {
+                if (moving && x != -1 && y != -1)
+                {
+                    Options options = new Options();
+                    rectangle_bounds.Height = rectangle_bounds.Width;
+                    options.RectangleBounds = rectangle_bounds;
+
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options, g);
+                    IShape shape = shapeFactory.getShape(shapeType);
+                    shapes.Add(shape);
+                    redraw();
+                    //drawingPanel.Invalidate();
+                }
+            }
+            else if (shapeType != ShapeType.Free)
             {
                 if (moving && x != -1 && y != -1)
                 {
@@ -160,7 +191,7 @@ namespace WindowsFormsApp2
                 item.Draw();
             }
 
-            panel1.Focus();
+            drawingPanel.Focus();
         }
         public void showPreview()
         {
@@ -171,7 +202,7 @@ namespace WindowsFormsApp2
             //panel1.Focus();
         }
 
-        private void panel1_PreviewKeyDown_1(object sender, PreviewKeyDownEventArgs e)
+        private void drawingPanelKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Z && e.Control)
             {
@@ -182,7 +213,7 @@ namespace WindowsFormsApp2
                 IShape lastShape = shapes.Last();
                 shapes.Remove(lastShape);
                 removedShapes.Add(lastShape);
-                panel1.Invalidate();
+                drawingPanel.Invalidate();
             }
             else if (e.KeyCode == Keys.Y && e.Control)
             {
@@ -193,7 +224,7 @@ namespace WindowsFormsApp2
                 IShape lastShape = removedShapes.Last();
                 removedShapes.Remove(lastShape);
                 shapes.Add(lastShape);
-                panel1.Invalidate();
+                drawingPanel.Invalidate();
             }
         }
 
@@ -204,7 +235,7 @@ namespace WindowsFormsApp2
                 shapes.Remove(selectedShape);
                 selectedShape.RotateShape(25, selectedShape);
                 shapes.Add(selectedShape);
-                panel1.Invalidate();
+                drawingPanel.Invalidate();
             }
         }
     }
