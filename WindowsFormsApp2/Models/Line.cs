@@ -38,5 +38,10 @@ namespace WindowsFormsApp2
             options.Y = point.Y;
             return shape;
         }
+
+        public IShape RotateShape(float angle, IShape shape)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

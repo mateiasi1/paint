@@ -36,5 +36,10 @@ namespace WindowsFormsApp2
             options.RectangleBounds = new System.Drawing.Rectangle(point.X, point.Y, options.RectangleBounds.Width, options.RectangleBounds.Height);
             return shape;
         }
+
+        public IShape RotateShape(float angle, IShape shape)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

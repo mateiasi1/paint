@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,17 @@ namespace WindowsFormsApp2
         public IShape MoveShape(Point point, IShape shape)
         {
             options.RectangleBounds = new System.Drawing.Rectangle(point.X, point.Y, options.RectangleBounds.Width, options.RectangleBounds.Height);
+            return shape;
+        }
+
+        public IShape RotateShape(float angle, IShape shape)
+        {
+            using (Matrix m = new Matrix())
+            {
+                m.RotateAt(angle, new PointF(options.RectangleBounds.Left + (options.RectangleBounds.Width / 2),
+                                          options.RectangleBounds.Top + (options.RectangleBounds.Height / 2)));
+                g.Transform = m;
+            }
             return shape;
         }
     }

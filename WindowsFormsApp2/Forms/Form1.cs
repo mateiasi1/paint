@@ -22,7 +22,7 @@ namespace WindowsFormsApp2
         List<IShape> shapes = new List<IShape>();
         List<IShape> removedShapes = new List<IShape>();
         IShape selectedShape;
-
+        List<IShape> previewShape = new List<IShape>();
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +32,12 @@ namespace WindowsFormsApp2
             pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         }
 
+
         private void drawing_Canvas(object sender, PaintEventArgs e)
         {
             redraw();
+            showPreview();
+            previewShape.Clear();
         }
 
         private void freeDrawButton(object sender, EventArgs e)
@@ -92,6 +95,21 @@ namespace WindowsFormsApp2
                     
                 }
             }
+            this.rectangle_bounds.Size = new Size(e.X - this.rectangle_bounds.X, e.Y - this.rectangle_bounds.Y);
+            if (shapeType != ShapeType.Free)
+            {
+                if (moving && x != -1 && y != -1)
+                {
+                    Options options = new Options();
+                    options.RectangleBounds = rectangle_bounds;
+
+                    AbstractFactory shapeFactory = FactoryProducer.getFactory(shapeType, pen, options, g);
+                    IShape shape = shapeFactory.getShape(shapeType);
+                    previewShape.Add(shape);
+                    showPreview();
+                    panel1.Invalidate();
+                }
+            }
             if (selectedShape != null)
             {
                 shapes.Remove(selectedShape);
@@ -144,6 +162,14 @@ namespace WindowsFormsApp2
 
             panel1.Focus();
         }
+        public void showPreview()
+        {
+            foreach (var item in previewShape)
+            {
+                item.Draw();
+            }
+            //panel1.Focus();
+        }
 
         private void panel1_PreviewKeyDown_1(object sender, PreviewKeyDownEventArgs e)
         {
@@ -173,11 +199,13 @@ namespace WindowsFormsApp2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var shape = shapes.FirstOrDefault();
-            shapes.Remove(shape);
-            shape.MoveShape(new Point(20, 20), shape);
-            shapes.Add(shape);
-            panel1.Invalidate();
+            if (selectedShape != null)
+            {
+                shapes.Remove(selectedShape);
+                selectedShape.RotateShape(25, selectedShape);
+                shapes.Add(selectedShape);
+                panel1.Invalidate();
+            }
         }
     }
 }
